@@ -1,0 +1,57 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <label for="textInput">Text Input:</label>
+    <input type="text" id="textInput" [formControlName]="FormNames.textInput">
+
+    <br>
+
+    <label for="numberInput">Number Input:</label>
+    <input type="number" id="numberInput" formControlName="numberInput">
+
+    <br>
+
+    <label for="emailInput">Email Input:</label>
+    <input type="email" id="emailInput" formControlName="emailInput">
+
+    <br>
+
+    <label for="passwordInput">Password Input:</label>
+    <input type="password" id="passwordInput" formControlName="passwordInput">
+
+    <br>
+
+    <label for="checkbox">Checkbox:</label>
+    <input type="checkbox" id="checkbox" formControlName="checkbox">
+
+    <br>
+
+    <label for="radio">Radio Button:</label>
+    <input type="radio" id="radio1" name="radio" [value]="'Option1'" formControlName="radio">
+    <label for="radio1">Option 1</label>
+    <input type="radio" id="radio2" name="radio" [value]="'Option2'" formControlName="radio">
+    <label for="radio2">Option 2</label>
+
+    <br>
+
+    <label for="select">Select:</label>
+    <select id="select" formControlName="select">
+        <option [ngValue]="1">Option 1</option>
+        <option [ngValue]="2">Option 2</option>
+        <option [ngValue]="3">Option 3</option>
+    </select>
+
+    <br>
+
+    <label for="multi-select">Multi Select:</label>
+
+    <br>
+
+    <select id="multi-select" formControlName="multiSelect" [multiple]="true">
+        <option [ngValue]="1">Option 1</option>
+        <option [ngValue]="2">Option 2</option>
+        <option [ngValue]="3">Option 3</option>
+    </select>
+
+    <br>
+
+    <button type="submit">Submit</button>
+</form>
