@@ -11,7 +11,3 @@ export interface IRegistrationRequest {
     name: string;
   };
 }
-
-export interface ITestType {
-  name: string;
-}

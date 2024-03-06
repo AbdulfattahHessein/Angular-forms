@@ -5,29 +5,29 @@
     <br>
 
     <label for="numberInput">Number Input:</label>
-    <input type="number" id="numberInput" formControlName="numberInput">
+    <input type="number" [id]="FormNames.numberInput" [formControlName]="FormNames.numberInput">
 
     <br>
 
     <label for="emailInput">Email Input:</label>
-    <input type="email" id="emailInput" formControlName="emailInput">
+    <input type="email" id="emailInput" [formControlName]="FormNames.emailInput">
 
     <br>
 
     <label for="passwordInput">Password Input:</label>
-    <input type="password" id="passwordInput" formControlName="passwordInput">
+    <input type="password" id="passwordInput" [formControlName]="FormNames.passwordInput">
 
     <br>
 
     <label for="checkbox">Checkbox:</label>
-    <input type="checkbox" id="checkbox" formControlName="checkbox">
+    <input type="checkbox" id="checkbox" [formControlName]="FormNames.checkbox">
 
     <br>
 
     <label for="radio">Radio Button:</label>
-    <input type="radio" id="radio1" name="radio" [value]="'Option1'" formControlName="radio">
+    <input type="radio" id="radio1" name="radio" [value]="'Option1'" [formControlName]="FormNames.radio">
     <label for="radio1">Option 1</label>
-    <input type="radio" id="radio2" name="radio" [value]="'Option2'" formControlName="radio">
+    <input type="radio" id="radio2" name="radio" [value]="'Option2'" [formControlName]="FormNames.radio">
     <label for="radio2">Option 2</label>
 
     <br>
@@ -45,7 +45,7 @@
 
     <br>
 
-    <select id="multi-select" formControlName="multiSelect" [multiple]="true">
+    <select id="multi-select" [formControlName]="FormNames.multiSelect" [multiple]="true">
         <option [ngValue]="1">Option 1</option>
         <option [ngValue]="2">Option 2</option>
         <option [ngValue]="3">Option 3</option>

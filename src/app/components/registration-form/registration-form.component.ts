@@ -8,8 +8,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ExtractFormControl } from 'src/app/helpers/ExtractFormValue';
-import { IRegistrationRequest, ITestType } from './Form/IRegistrationForm';
+import { IRegistrationRequest } from './Form/IRegistrationForm';
+import { nameof } from 'src/app/helpers/nameof/nameof';
 
 @Component({
   selector: 'app-registration-form',
@@ -17,20 +17,12 @@ import { IRegistrationRequest, ITestType } from './Form/IRegistrationForm';
   styleUrls: ['./registration-form.component.css'],
 })
 export class RegistrationFormComponent implements OnInit {
-  test = new FormControl(0, Validators.required);
-  FormNames = {
-    textInput: 'textInput',
-    numberInput: 'numberInput',
-    emailInput: 'emailInput',
-    passwordInput: 'passwordInput',
-    checkbox: 'checkbox',
-    radio: 'radio',
-    select: 'checkbox',
-  };
-
-  constructor(private formBuilder: FormBuilder) {}
+  FormNames = nameof<IRegistrationRequest>();
+  FormNamesFn = nameof<IRegistrationRequest>;
 
   formGroup: TypedForm<IRegistrationRequest>;
+
+  constructor(private formBuilder: FormBuilder) {}
 
   InitializeForm() {
     this.formGroup = createForm<IRegistrationRequest>({
@@ -40,38 +32,39 @@ export class RegistrationFormComponent implements OnInit {
       numberInput: new FormControl(0),
       passwordInput: new FormControl('', Validators.required),
       radio: new FormControl('Option 1'),
-      multiSelect: new FormArray([new FormControl(1)]),
+      multiSelect: new FormControl([1]),
       select: new FormControl(0, Validators.required),
       nestedObject: new FormGroup({
         name: new FormControl('', Validators.required),
       }),
     });
-    return this.formGroup;
   }
-  FillFormWithOldValue() {
-    setTimeout(() => {
-      let oldFormValue: IRegistrationRequest = {
-        textInput: 'Text Input',
-        numberInput: 0,
-        emailInput: 'Email Input',
-        passwordInput: 'Password Input',
-        checkbox: true,
-        radio: 'Option1',
-        select: 2,
-        multiSelect: [1, 2],
-        nestedObject: {
-          name: 'Nested Object',
-        },
-      };
-      this.formGroup.patchValue(oldFormValue);
-    }, 2000);
+  patchFormData() {
+    let oldFormValue: IRegistrationRequest = {
+      textInput: 'Taha',
+      numberInput: 0,
+      emailInput: 'Abdulfattah@gmail.com',
+      passwordInput: 'Password Input',
+      checkbox: true,
+      radio: 'Option1',
+      select: 2,
+      multiSelect: [1, 2],
+      nestedObject: {
+        name: 'Nested Object',
+      },
+    };
+    this.formGroup.patchValue(oldFormValue);
   }
   ngOnInit(): void {
     this.InitializeForm();
-    this.FillFormWithOldValue();
+
+    this.patchFormData();
+
     setTimeout(() => {
-      console.log(this.formGroup.patchValue({ checkbox: false }));
+      this.formGroup.patchValue({ textInput: 'Ya Hala' });
     }, 2000);
+
+    console.log(nameof<IRegistrationRequest>().passwordInput); // test nameof function
   }
 
   onSubmit() {
