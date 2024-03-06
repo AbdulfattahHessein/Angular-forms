@@ -7,6 +7,9 @@ export interface IRegistrationRequest {
   radio: string;
   select: number;
   multiSelect: number[];
+  nestedObject: {
+    name: string;
+  };
 }
 
 export interface ITestType {

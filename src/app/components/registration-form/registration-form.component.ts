@@ -40,8 +40,11 @@ export class RegistrationFormComponent implements OnInit {
       numberInput: new FormControl(0),
       passwordInput: new FormControl('', Validators.required),
       radio: new FormControl('Option 1'),
-      multiSelect: new FormControl([1, 2, 3, 4, 5]),
+      multiSelect: new FormArray([new FormControl(1)]),
       select: new FormControl(0, Validators.required),
+      nestedObject: new FormGroup({
+        name: new FormControl('', Validators.required),
+      }),
     });
     return this.formGroup;
   }
@@ -56,6 +59,9 @@ export class RegistrationFormComponent implements OnInit {
         radio: 'Option1',
         select: 2,
         multiSelect: [1, 2],
+        nestedObject: {
+          name: 'Nested Object',
+        },
       };
       this.formGroup.patchValue(oldFormValue);
     }, 2000);
@@ -64,7 +70,7 @@ export class RegistrationFormComponent implements OnInit {
     this.InitializeForm();
     this.FillFormWithOldValue();
     setTimeout(() => {
-      console.log(this.formGroup.value);
+      console.log(this.formGroup.patchValue({ checkbox: false }));
     }, 2000);
   }
 
