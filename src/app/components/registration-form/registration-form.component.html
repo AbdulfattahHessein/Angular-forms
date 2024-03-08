@@ -45,7 +45,7 @@
 
     <br>
 
-    <select id="multi-select" [formControlName]="FormNames.multiSelect" [multiple]="true">
+    <select id="multi-select" [formControlName]="FormNames.multiSelect" multiple>
         <option [ngValue]="1">Option 1</option>
         <option [ngValue]="2">Option 2</option>
         <option [ngValue]="3">Option 3</option>
@@ -53,5 +53,9 @@
 
     <br>
 
+    <form [formGroupName]="FormNames.nestedObject">
+        <label for="name">Name:</label>
+        <input type="text" id="name" [formControlName]="NestedObjectNames.name">
+    </form>
     <button type="submit">Submit</button>
 </form>

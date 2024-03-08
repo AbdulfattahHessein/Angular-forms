@@ -1,5 +1,5 @@
 export interface IRegistrationRequest {
-  textInput: string;
+  textInput?: string;
   numberInput: number;
   emailInput: string;
   passwordInput: string;
@@ -7,7 +7,12 @@ export interface IRegistrationRequest {
   radio: string;
   select: number;
   multiSelect: number[];
-  nestedObject: {
+  nestedObject: NestedObject;
+  nestedObjectArr: {
     name: string;
-  };
+  }[];
+  optionalTextInput?: string;
+}
+export interface NestedObject {
+  name: string;
 }
