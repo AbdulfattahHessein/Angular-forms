@@ -46,10 +46,22 @@
     <br>
 
     <select id="multi-select" [formControlName]="FormNames.multiSelect" multiple>
-        <option [ngValue]="1">Option 1</option>
-        <option [ngValue]="2">Option 2</option>
-        <option [ngValue]="3">Option 3</option>
+        <option [ngValue]="'Taha'">Taha</option>
+        <option [ngValue]="'Hussein'">Hussein</option>
     </select>
+    <br>
+    <br>
+
+    <div [formArrayName]="FormNames.nestedObjectArr"
+        *ngFor="let item of formGroup.controls.nestedObjectArr.controls; let i = index">
+        <div>
+            <label>Item {{ i + 1 }}:</label>
+            <form [formGroupName]="i">
+                <input [formControlName]="'name'" placeholder="Name">
+            </form>
+        </div>
+
+    </div>
 
     <br>
 

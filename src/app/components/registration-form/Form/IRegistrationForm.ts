@@ -6,7 +6,7 @@ export interface IRegistrationRequest {
   checkbox: boolean;
   radio: string;
   select: number;
-  multiSelect: number[];
+  multiSelect?: string[];
   nestedObject: NestedObject;
   nestedObjectArr: {
     name: string;

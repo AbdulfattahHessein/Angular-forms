@@ -9,7 +9,6 @@ import {
 import { IRegistrationRequest, NestedObject } from './Form/IRegistrationForm';
 import { nameof } from 'src/app/helpers/nameof/nameof';
 import {
-  MappedFormGroup,
   TypedForm,
   createForm,
 } from 'src/app/helpers/TypedForm/MappedFormGroup';
@@ -38,15 +37,20 @@ export class RegistrationFormComponent implements OnInit {
       numberInput: new FormControl(0),
       passwordInput: new FormControl('', Validators.required),
       radio: new FormControl('Option1'),
-      multiSelect: new FormControl([1, 2, 3]),
+      multiSelect: new FormControl(['Taha', 'Hussein']),
       select: new FormControl(1, Validators.required),
       nestedObject: new FormGroup({
         name: new FormControl('', Validators.required),
       }),
       nestedObjectArr: new FormArray([
-        new FormGroup({ name: new FormControl('') }),
+        new FormGroup({ name: new FormControl('Mohsen') }),
+        new FormGroup({ name: new FormControl('Hassan') }),
       ]),
     });
+    console.log(this.formGroup.controls.multiSelect);
+  }
+  getFormArray() {
+    return this.formGroup.controls.multiSelect;
   }
   patchFormData() {
     let oldFormValue: IRegistrationRequest = {
@@ -57,7 +61,7 @@ export class RegistrationFormComponent implements OnInit {
       checkbox: true,
       radio: 'Option1',
       select: 2,
-      multiSelect: [1, 2],
+      multiSelect: ['Taha', 'Hussein'],
       nestedObject: {
         name: 'Nested Object',
       },
@@ -75,7 +79,12 @@ export class RegistrationFormComponent implements OnInit {
 
     setTimeout(() => {
       this.formGroup.patchValue({ textInput: 'Ya Hala' });
-    }, 2000);
+      this.formGroup.controls.nestedObjectArr.controls.push(
+        new FormGroup({
+          name: new FormControl('Hala Madrid'),
+        })
+      );
+    }, 4000);
   }
 
   onSubmit() {
