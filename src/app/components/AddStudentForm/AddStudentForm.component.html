@@ -1,0 +1,61 @@
+<form [formGroup]="AddStudentForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" [formControl]="AddStudentForm.controls.name">
+  </div>
+  <div>
+    <label for="age">Age:</label>
+    <input type="number" id="age" [formControlName]="FormNames.age">
+  </div>
+
+  <div [formGroup]="AddStudentForm.controls.address">
+    <div>
+      <label for="city">City:</label>
+      <input type="text" id="city" [formControl]="AddStudentForm.controls.address.controls.city">
+    </div>
+
+    <div>
+      <label for="country">Country:</label>
+      <input type="text" id="country" [formControlName]="FormAddressNames.country">
+    </div>
+  </div>
+  <br>
+
+  <div></div>
+
+  <div formArrayName="skills" *ngFor="let skill of AddStudentForm.controls.skills.controls; let i = index">
+    <div [formGroupName]="i">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [formControlName]="FormSkillNames.name">
+      <br>
+      <label for="level">Level:</label>
+      <input type="number" id="level" [formControlName]="FormSkillNames.level">
+      <button type="button" (click)="removeSkill(i)">Remove</button>
+      <br>
+      <br>
+    </div>
+  </div>
+  <button type="button" (click)="addSkill()">Add</button>
+  <br>
+
+  <select [formControl]="AddStudentForm.controls.favFoods" multiple>
+    <!-- <option *ngFor="let food of favFoods" [value]="food">{{food}}</option> -->
+    <option [ngValue]="1"> Pizza</option>
+    <option [ngValue]="2">Pasta</option>
+    <option [ngValue]="3">Burger</option>
+    <option [ngValue]="4">Sushi</option>
+    <option [ngValue]="5">Tacos</option>
+  </select>
+  <br>
+  <span *ngFor="let food of AddStudentForm.controls.favFoods.value">{{food}}, </span>
+
+  <input type="number" #newFood>
+  <br>
+  <button type="button" (click)="addFavFood(+newFood.value)">Add Fav Food</button>
+  <br>
+  <button type="button" (click)="removeFavFood(+newFood.value)">Remove Fav Food</button>
+  <br>
+
+
+  <button type="submit">Submit</button>
+</form>
