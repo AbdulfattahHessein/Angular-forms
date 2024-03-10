@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import {
-  MappedFormGroup,
   TypedForm,
   createForm,
 } from 'src/app/helpers/TypedForm/MappedFormGroup';
@@ -19,7 +24,10 @@ import { nameof } from 'src/app/helpers/nameof/nameof';
   templateUrl: './AddStudentForm.component.html',
   styleUrls: ['./AddStudentForm.component.css'],
 })
-export class AddStudentFormComponent implements OnInit {
+export class AddStudentFormComponent implements OnInit, AfterViewInit {
+  onSelectChange($event: Event) {
+    console.log('event fired', $event);
+  }
   AddStudentForm: TypedForm<AddStudentRequest>;
   FormNames = nameof<AddStudentRequest>();
   FormAddressNames = nameof<IAddress>();
@@ -45,7 +53,10 @@ export class AddStudentFormComponent implements OnInit {
   addFavFood(favFood: number) {
     this.AddStudentForm.controls.favFoods.value.push(favFood);
   }
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {
     //#region Old way
     // let AddStudentForm2 = formBuilder.group<IAddStudentForm>({
     //   name: ['', Validators.required],
@@ -83,6 +94,12 @@ export class AddStudentFormComponent implements OnInit {
       }
     );
   }
+  ngAfterViewInit(): void {
+    let selectElement = this.mySelect.nativeElement as HTMLSelectElement;
+    selectElement.value = 'option2';
+    // Manually trigger change detection
+    this.cdr.detectChanges();
+  }
   addSkill() {
     this.AddStudentForm.controls.skills.push(
       new FormGroup({
@@ -101,8 +118,12 @@ export class AddStudentFormComponent implements OnInit {
     this.AddStudentForm.controls.skills.removeAt(skillIndex);
   }
   ngOnInit(): void {
+    this.AddStudentForm.controls.favFoods.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
     this.pathOldValues();
   }
+  @ViewChild('mySelect') mySelect: ElementRef;
 
   pathOldValues() {
     let oldValue = {
@@ -150,15 +171,15 @@ interface ISkill {
   level: number;
 }
 
-// interface IAddStudentForm {
-//   name: FormControl<string>;
-//   age: FormControl<number>;
-//   address: FormGroup<{
-//     city: FormControl<string>;
-//     country: FormControl<string>;
-//   }>;
-//   skills: FormArray<
-//     FormGroup<{ name: FormControl<string>; level: FormControl<number> }>
-//   >;
-//   favFoods: FormControl<number[]>;
-// }
+interface IAddStudentForm {
+  name: FormControl<string>;
+  age: FormControl<number>;
+  address: FormGroup<{
+    city: FormControl<string>;
+    country: FormControl<string>;
+  }>;
+  skills: FormArray<
+    FormGroup<{ name: FormControl<string>; level: FormControl<number> }>
+  >;
+  favFoods: FormControl<number[]>;
+}

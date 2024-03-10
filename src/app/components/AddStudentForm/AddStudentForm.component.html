@@ -56,6 +56,11 @@
   <button type="button" (click)="removeFavFood(+newFood.value)">Remove Fav Food</button>
   <br>
 
+  <select #mySelect (onchange)="onSelectChange($event)" placeholder="Select">
+    <option [value]="'option1'">Option 1</option>
+    <option [value]="'option2'">Option 2</option>
+    <option [value]="'option3'">Option 3</option>
+  </select>
 
   <button type="submit">Submit</button>
 </form>
