@@ -3,5 +3,6 @@
         "endregion",
         "hadeel",
         "nameof"
-    ]
+    ],
+    "CodeGPT.apiKey": "OpenAI"
 }
