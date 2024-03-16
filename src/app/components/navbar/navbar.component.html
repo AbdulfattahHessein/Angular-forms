@@ -1,0 +1,51 @@
+<header>
+  <nav>
+    <ul class="navbar-nav mr-auto">
+      <!-- AddStudent navigation link -->
+
+      <li>
+        <a
+          routerLink
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Home
+        </a>
+        <!-- <a
+          routerLink="/home"
+          routerLinkActive="active"
+          >Home</a
+        > -->
+      </li>
+      <li>
+        <a
+          routerLink="./registration"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Registration
+        </a>
+      </li>
+
+      <li>
+        <a
+          routerLink="/add-student"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Add Student
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/students/1"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Students
+        </a>
+      </li>
+      <!-- Add other navigation links here if needed -->
+    </ul>
+  </nav>
+</header>

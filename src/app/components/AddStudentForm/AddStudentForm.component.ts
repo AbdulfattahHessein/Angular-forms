@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -25,9 +26,8 @@ import { nameof } from 'src/app/helpers/nameof/nameof';
   styleUrls: ['./AddStudentForm.component.css'],
 })
 export class AddStudentFormComponent implements OnInit, AfterViewInit {
-  onSelectChange($event: Event) {
-    console.log('event fired', $event);
-  }
+  @ViewChild('selectElement') selectElement: ElementRef<HTMLSelectElement>;
+
   AddStudentForm: TypedForm<AddStudentRequest>;
   FormNames = nameof<AddStudentRequest>();
   FormAddressNames = nameof<IAddress>();
@@ -44,6 +44,7 @@ export class AddStudentFormComponent implements OnInit, AfterViewInit {
     ]),
     favFoods: new FormControl([]),
   });
+
   removeFavFood(favFood: number) {
     this.AddStudentForm.controls.favFoods.value.splice(
       this.AddStudentForm.controls.favFoods.value.indexOf(favFood),
@@ -95,10 +96,11 @@ export class AddStudentFormComponent implements OnInit, AfterViewInit {
     );
   }
   ngAfterViewInit(): void {
-    let selectElement = this.mySelect.nativeElement as HTMLSelectElement;
-    selectElement.value = 'option2';
-    // Manually trigger change detection
-    this.cdr.detectChanges();
+    this.selectElement.nativeElement.value = '3';
+    this.selectElement.nativeElement.dispatchEvent(new Event('change'));
+  }
+  onSelectChange(value: any) {
+    console.log('event fired', value);
   }
   addSkill() {
     this.AddStudentForm.controls.skills.push(
@@ -121,10 +123,9 @@ export class AddStudentFormComponent implements OnInit, AfterViewInit {
     this.AddStudentForm.controls.favFoods.valueChanges.subscribe((value) => {
       console.log(value);
     });
+
     this.pathOldValues();
   }
-  @ViewChild('mySelect') mySelect: ElementRef;
-
   pathOldValues() {
     let oldValue = {
       name: 'Mohsen',
@@ -153,6 +154,9 @@ export class AddStudentFormComponent implements OnInit, AfterViewInit {
       console.log('Form is invalid');
     }
   }
+  Required(control: AbstractControl) {
+    return control.errors?.['required'];
+  }
 }
 
 interface AddStudentRequest {
@@ -171,15 +175,17 @@ interface ISkill {
   level: number;
 }
 
-interface IAddStudentForm {
+type AddStudentForm = FormGroup<{
   name: FormControl<string>;
   age: FormControl<number>;
   address: FormGroup<{
     city: FormControl<string>;
     country: FormControl<string>;
   }>;
-  skills: FormArray<
-    FormGroup<{ name: FormControl<string>; level: FormControl<number> }>
-  >;
-  favFoods: FormControl<number[]>;
-}
+  // skills: FormArray<
+  //   FormGroup<{ name: FormControl<string>; level: FormControl<number> }>
+  // >;
+  // favFoods: FormControl<number[]>;
+}>;
+
+type AddStudentFormValue = ReturnType<AddStudentForm['getRawValue']>;

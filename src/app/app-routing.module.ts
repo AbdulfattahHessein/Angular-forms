@@ -2,12 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { AddStudentFormComponent } from './components/AddStudentForm/AddStudentForm.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { StudentComponent } from './components/student/student.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/registration', pathMatch: 'full' },
+  // { path: '', redirectTo: '/registration', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'students/:id', component: StudentComponent },
   { path: 'registration', component: RegistrationFormComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'add-student', component: AddStudentFormComponent },
-  { path: '**', redirectTo: '/registration', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

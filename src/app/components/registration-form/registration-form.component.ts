@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -12,6 +12,7 @@ import {
   TypedForm,
   createForm,
 } from 'src/app/helpers/TypedForm/MappedFormGroup';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-form',
@@ -19,13 +20,18 @@ import {
   styleUrls: ['./registration-form.component.css'],
 })
 export class RegistrationFormComponent implements OnInit {
+  // router: Router = Inject(Router);
   FormNames = nameof<IRegistrationRequest>();
   NestedObjectNames = nameof<NestedObject>();
   FormNamesFn = nameof<IRegistrationRequest>;
 
   formGroup: TypedForm<IRegistrationRequest>;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.InitializeForm();
   }
 
@@ -73,6 +79,9 @@ export class RegistrationFormComponent implements OnInit {
     this.formGroup.patchValue(oldFormValue);
   }
   ngOnInit(): void {
+    this.router.routerState.root.url.subscribe((value) => {
+      console.log(value);
+    });
     setTimeout(() => {
       this.patchFormData();
     }, 500);
@@ -88,11 +97,17 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formGroup.valid) {
-      console.log('Form submitted successfully!');
-      console.log('Form value:', this.formGroup.value);
-    } else {
-      console.log('Form is invalid!');
-    }
+    // if (this.formGroup.valid) {
+    console.log('Form submitted successfully!');
+    console.log('Form value:', this.formGroup.value);
+    // } else {
+    console.log('Form is invalid!');
+    // }
+
+    this.router.navigate(['add-student']);
+    // this.router.navigate(['add-student'], {
+    //   relativeTo: this.activatedRoute,
+    // });
+    // this.router.navigateByUrl('/add-student');
   }
 }

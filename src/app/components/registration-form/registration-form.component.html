@@ -1,73 +1,104 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <label for="textInput">Text Input:</label>
-    <input type="text" id="textInput" [formControlName]="FormNames.textInput">
+  <label for="textInput">Text Input:</label>
+  <input type="text" id="textInput" [formControlName]="FormNames.textInput" />
 
-    <br>
+  <br />
 
-    <label for="numberInput">Number Input:</label>
-    <input type="number" [id]="FormNames.numberInput" [formControlName]="FormNames.numberInput">
+  <label for="numberInput">Number Input:</label>
+  <input
+    type="number"
+    [id]="FormNames.numberInput"
+    [formControlName]="FormNames.numberInput"
+  />
 
-    <br>
+  <br />
 
-    <label for="emailInput">Email Input:</label>
-    <input type="email" id="emailInput" [formControlName]="FormNames.emailInput">
+  <label for="emailInput">Email Input:</label>
+  <input
+    type="email"
+    id="emailInput"
+    [formControlName]="FormNames.emailInput"
+  />
 
-    <br>
+  <br />
 
-    <label for="passwordInput">Password Input:</label>
-    <input type="password" id="passwordInput" [formControlName]="FormNames.passwordInput">
+  <label for="passwordInput">Password Input:</label>
+  <input
+    type="password"
+    id="passwordInput"
+    [formControlName]="FormNames.passwordInput"
+  />
 
-    <br>
+  <br />
 
-    <label for="checkbox">Checkbox:</label>
-    <input type="checkbox" id="checkbox" [formControlName]="FormNames.checkbox">
+  <label for="checkbox">Checkbox:</label>
+  <input type="checkbox" id="checkbox" [formControlName]="FormNames.checkbox" />
 
-    <br>
+  <br />
 
-    <label for="radio">Radio Button:</label>
-    <input type="radio" id="radio1" name="radio" [value]="'Option1'" [formControlName]="FormNames.radio">
-    <label for="radio1">Option 1</label>
-    <input type="radio" id="radio2" name="radio" [value]="'Option2'" [formControlName]="FormNames.radio">
-    <label for="radio2">Option 2</label>
+  <label for="radio">Radio Button:</label>
+  <input
+    type="radio"
+    id="radio1"
+    name="radio"
+    [value]="'Option1'"
+    [formControlName]="FormNames.radio"
+  />
+  <label for="radio1">Option 1</label>
+  <input
+    type="radio"
+    id="radio2"
+    name="radio"
+    [value]="'Option2'"
+    [formControlName]="FormNames.radio"
+  />
+  <label for="radio2">Option 2</label>
 
-    <br>
+  <br />
 
-    <label for="select">Select:</label>
-    <select id="select" formControlName="select">
-        <option [ngValue]="1">Option 1</option>
-        <option [ngValue]="2">Option 2</option>
-        <option [ngValue]="3">Option 3</option>
-    </select>
+  <label for="select">Select:</label>
+  <select id="select" formControlName="select">
+    <option [ngValue]="1">Option 1</option>
+    <option [ngValue]="2">Option 2</option>
+    <option [ngValue]="3">Option 3</option>
+  </select>
 
-    <br>
+  <br />
 
-    <label for="multi-select">Multi Select:</label>
+  <label for="multi-select">Multi Select:</label>
 
-    <br>
+  <br />
 
-    <select id="multi-select" [formControlName]="FormNames.multiSelect" multiple>
-        <option [ngValue]="'Taha'">Taha</option>
-        <option [ngValue]="'Hussein'">Hussein</option>
-    </select>
-    <br>
-    <br>
+  <select id="multi-select" [formControlName]="FormNames.multiSelect" multiple>
+    <option [ngValue]="'Taha'">Taha</option>
+    <option [ngValue]="'Hussein'">Hussein</option>
+  </select>
+  <br />
+  <br />
 
-    <div [formArrayName]="FormNames.nestedObjectArr"
-        *ngFor="let item of formGroup.controls.nestedObjectArr.controls; let i = index">
-        <div>
-            <label>Item {{ i + 1 }}:</label>
-            <form [formGroupName]="i">
-                <input [formControlName]="'name'" placeholder="Name">
-            </form>
-        </div>
-
+  <div
+    [formArrayName]="FormNames.nestedObjectArr"
+    *ngFor="
+      let item of formGroup.controls.nestedObjectArr.controls;
+      let i = index
+    "
+  >
+    <div>
+      <label>Item {{ i + 1 }}:</label>
+      <div [formGroupName]="i">
+        <input [formControlName]="'name'" placeholder="Name" />
+      </div>
     </div>
+  </div>
 
-    <br>
+  <br />
 
-    <form [formGroupName]="FormNames.nestedObject">
-        <label for="name">Name:</label>
-        <input type="text" id="name" [formControlName]="NestedObjectNames.name">
-    </form>
-    <button type="submit">Submit</button>
+  <div [formGroupName]="FormNames.nestedObject">
+    <label for="name">Name:</label>
+    <input type="text" id="name" [formControlName]="NestedObjectNames.name" />
+  </div>
+  <button type="submit">Submit</button>
 </form>
+<br />
+
+<a routerLink="/login" routerLinkActive="active"> Login </a>

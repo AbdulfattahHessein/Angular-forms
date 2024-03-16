@@ -1,0 +1,13 @@
+<p>student works!</p>
+<h1>{{ student.id }}</h1>
+<h2>{{ student.name }}</h2>
+
+<input type="text" #searchInput placeholder="Search Here" />
+<!-- <button
+  [routerLink]="'/students/1'"
+  [queryParams]="{ search: searchInput.value }"
+>
+  Search
+</button> searchInput.value is empty in first click -->
+
+<button (click)="onSearchClick(searchInput.value)">Search</button>
