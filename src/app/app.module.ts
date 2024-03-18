@@ -12,6 +12,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { StudentComponent } from './components/student/student.component';
+import { RouterModule } from '@angular/router';
+import { RoutingModule } from './routing/routing.module';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +27,15 @@ import { StudentComponent } from './components/student/student.component';
     HomeComponent,
     LoginComponent,
     StudentComponent,
+    LoaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    // RoutingModule, //this replaced by AppRoutingModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

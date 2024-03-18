@@ -1,21 +1,31 @@
 <header>
   <nav>
+    <div>
+      <button routerLink="/Login">Login</button> &nbsp;&nbsp;
+      <button routerLink="/Login" [queryParams]="{ logout: true }">
+        Logout
+      </button>
+    </div>
     <ul class="navbar-nav mr-auto">
       <!-- AddStudent navigation link -->
 
       <li>
-        <a
+        <!-- <a
           routerLink
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
           Home
-        </a>
-        <!-- <a
-          routerLink="/home"
+        </a> -->
+        <a
+          routerLink="/Home"
           routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [state]="{
+            message: 'Hello Taha Hussein, this message from route data state'
+          }"
           >Home</a
-        > -->
+        >
       </li>
       <li>
         <a

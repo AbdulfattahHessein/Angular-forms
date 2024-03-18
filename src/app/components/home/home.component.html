@@ -1,1 +1,9 @@
-<p>home works!</p>
+<p>{{ message }}</p>
+
+<h1>Users</h1>
+<ul *ngFor="let user of users">
+  <li>{{ user.id }}</li>
+  <li>{{ user.name }}</li>
+  <li>{{ user.username }}</li>
+  <li>{{ user.password }}</li>
+</ul>

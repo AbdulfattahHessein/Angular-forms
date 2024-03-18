@@ -14,6 +14,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { IDeactivateComponent } from 'src/app/guards/canDeactivate.guard';
 import {
   TypedForm,
   createForm,
@@ -25,7 +27,9 @@ import { nameof } from 'src/app/helpers/nameof/nameof';
   templateUrl: './AddStudentForm.component.html',
   styleUrls: ['./AddStudentForm.component.css'],
 })
-export class AddStudentFormComponent implements OnInit, AfterViewInit {
+export class AddStudentFormComponent
+  implements OnInit, AfterViewInit, IDeactivateComponent
+{
   @ViewChild('selectElement') selectElement: ElementRef<HTMLSelectElement>;
 
   AddStudentForm: TypedForm<AddStudentRequest>;
@@ -94,6 +98,12 @@ export class AddStudentFormComponent implements OnInit, AfterViewInit {
         console.log(value);
       }
     );
+  }
+  canDeactivate(): boolean | Promise<boolean> | Observable<boolean> {
+    if (this.AddStudentForm.dirty) {
+      return confirm('Are you sure you want to leave?');
+    }
+    return true;
   }
   ngAfterViewInit(): void {
     this.selectElement.nativeElement.value = '3';

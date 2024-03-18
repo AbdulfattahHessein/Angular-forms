@@ -26,6 +26,10 @@ export class StudentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.paramsSubscription();
     this.queryParamsSubscription();
+    this.fragmentSubscription();
+  }
+  jumpToSection(section: string): void {
+    document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
   }
   onSearchClick(searchKey: string) {
     this.router.navigate(['students', 1], {
@@ -54,6 +58,14 @@ export class StudentComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.push(queryParamsSubs);
+  }
+  fragmentSubscription() {
+    let fragmentSubs = this.activatedRoute.fragment.subscribe((fragment) => {
+      console.log('fragment', fragment);
+      if (fragment) this.jumpToSection(fragment);
+    });
+
+    this.subscriptions.push(fragmentSubs);
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((s) => s.unsubscribe());
